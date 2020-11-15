@@ -15,9 +15,17 @@ namespace crvCalc_v0._5
         public Form1()
         {
             InitializeComponent();
-        }
+			timer1.Start();
+			
+            
+		}
 
-       
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+			toolStripStatusLabel_DayOfWeek.Text = DateTime.Now.DayOfWeek.ToString();
+			toolStripStatusLabel_Date.Text = DateTime.Now.ToLongDateString();
+			toolStripStatusLabel_Time.Text = DateTime.Now.ToLongTimeString();
+		}
     }
 
 
