@@ -26,6 +26,7 @@ namespace crvCalc_v0._5
 			toolStripStatusLabel_Date.Text = DateTime.Now.ToLongDateString();
 			toolStripStatusLabel_Time.Text = DateTime.Now.ToLongTimeString();
 		}
+
     }
 
 
