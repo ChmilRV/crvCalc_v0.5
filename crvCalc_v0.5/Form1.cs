@@ -115,126 +115,101 @@ namespace crvCalc_v0._5
 			} while (tempExp.Split(new char[] { '*', '/', '+', '-' }).Length > 2);
 			return tempExp;
 		}
-
 		private void button_0_Click(object sender, EventArgs e)
 		{
 			if (textBox.Text == "0") textBox.Text = string.Empty;
 			textBox.Text += "0";
 		}
-
 		private void button_1_Click(object sender, EventArgs e)
 		{
 			if (textBox.Text == "0") textBox.Text = string.Empty;
 			textBox.Text += "1";
 		}
-
 		private void button_2_Click(object sender, EventArgs e)
         {
 			if (textBox.Text == "0") textBox.Text = string.Empty;
 			textBox.Text += "2";
 		}
-
         private void button_3_Click(object sender, EventArgs e)
         {
 			if (textBox.Text == "0") textBox.Text = string.Empty;
 			textBox.Text += "3";
 		}
-
         private void button_4_Click(object sender, EventArgs e)
         {
 			if (textBox.Text == "0") textBox.Text = string.Empty;
 			textBox.Text += "4";
 		}
-
         private void button_5_Click(object sender, EventArgs e)
         {
 			if (textBox.Text == "0") textBox.Text = string.Empty;
 			textBox.Text += "5";
 		}
-
         private void button_6_Click(object sender, EventArgs e)
         {
 			if (textBox.Text == "0") textBox.Text = string.Empty;
 			textBox.Text += "6";
 		}
-
         private void button_7_Click(object sender, EventArgs e)
         {
 			if (textBox.Text == "0") textBox.Text = string.Empty;
 			textBox.Text += "7";
 		}
-
         private void button_8_Click(object sender, EventArgs e)
         {
 			if (textBox.Text == "0") textBox.Text = string.Empty;
 			textBox.Text += "8";
 		}
-
         private void button_9_Click(object sender, EventArgs e)
         {
 			if (textBox.Text == "0") textBox.Text = string.Empty;
 			textBox.Text += "9";
 		}
-
         private void button_Point_Click(object sender, EventArgs e)
         {
 			textBox.Text += ",";
 		}
-
         private void button_BracketLeft_Click(object sender, EventArgs e)
         {
 			if (textBox.Text == "0") textBox.Text = string.Empty;
 			textBox.Text += "(";
 		}
-
         private void button_BracketRight_Click(object sender, EventArgs e)
         {
 			if (textBox.Text == "0") textBox.Text = string.Empty;
 			textBox.Text += ")";
 		}
-
         private void button_Add_Click(object sender, EventArgs e)
         {
 			textBox.Text += "+";
 		}
-
         private void button_Subtract_Click(object sender, EventArgs e)
         {
 			textBox.Text += "-";
 		}
-
         private void button_Multiply_Click(object sender, EventArgs e)
         {
 			textBox.Text += "*";
 		}
-
         private void button_Divide_Click(object sender, EventArgs e)
         {
 			textBox.Text += "/";
 		}
-
         private void button_Backspace_Click(object sender, EventArgs e)
         {
 
 			if (textBox.Text == string.Empty) textBox.Text = "0";
 			else textBox.Text = textBox.Text.ToString().Remove(textBox.Text.ToString().Length - 1);
         }
-
 		private void button_Discharge_Click(object sender, EventArgs e)
 		{
 			textBox.Text = "0";
 		}
-
-
 		private void button_Calculate_Click(object sender, EventArgs e)
-        {
+		{
 			string tempResult = ExpressionToResult(textBox.Text);
 			listBox.Items.Add(textBox.Text + "=" + tempResult);
 			textBox.Text = tempResult;
-            
-
-
-        }
-
+		}
     }
 }
