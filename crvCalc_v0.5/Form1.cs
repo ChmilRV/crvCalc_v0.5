@@ -14,11 +14,9 @@ namespace crvCalc_v0._5
 {
     public partial class Form1 : Form
     {
-		//string expression = string.Empty;
 		string buffer;
 		double Memory = 0;
-		//double num1;
-		//double num2;
+		bool oldTextDelete = true;
 		public Form1()
         {
             InitializeComponent();
@@ -131,16 +129,18 @@ namespace crvCalc_v0._5
 					sw.WriteLine(item);
 				}
 			}
-			MessageBox.Show("Файл \"" + pathTxt + "\" записан.");
+			MessageBox.Show("Файл \"" + pathTxt + "\" записан.", "crvCalc_v0.5");
 		}
+
+
 		private void button_0_Click(object sender, EventArgs e)
 		{
-			if (textBox.Text == "0") textBox.Text = string.Empty;
+			if (textBox.Text == "0") textBox.Clear();
 			textBox.Text += "0";
 		}
 		private void button_1_Click(object sender, EventArgs e)
 		{
-			if (textBox.Text == "0") textBox.Text = string.Empty;
+			if (textBox.Text == "0") textBox.Clear();
 			textBox.Text += "1";
 		}
 		private void button_2_Click(object sender, EventArgs e)
@@ -150,51 +150,51 @@ namespace crvCalc_v0._5
 		}
         private void button_3_Click(object sender, EventArgs e)
         {
-			if (textBox.Text == "0") textBox.Text = string.Empty;
+			if (textBox.Text == "0") textBox.Clear();
 			textBox.Text += "3";
 		}
         private void button_4_Click(object sender, EventArgs e)
         {
-			if (textBox.Text == "0") textBox.Text = string.Empty;
+			if (textBox.Text == "0") textBox.Clear();
 			textBox.Text += "4";
 		}
         private void button_5_Click(object sender, EventArgs e)
         {
-			if (textBox.Text == "0") textBox.Text = string.Empty;
+			if (textBox.Text == "0") textBox.Clear();
 			textBox.Text += "5";
 		}
         private void button_6_Click(object sender, EventArgs e)
         {
-			if (textBox.Text == "0") textBox.Text = string.Empty;
+			if (textBox.Text == "0") textBox.Clear();
 			textBox.Text += "6";
 		}
         private void button_7_Click(object sender, EventArgs e)
         {
-			if (textBox.Text == "0") textBox.Text = string.Empty;
+			if (textBox.Text == "0") textBox.Clear();
 			textBox.Text += "7";
 		}
         private void button_8_Click(object sender, EventArgs e)
         {
-			if (textBox.Text == "0") textBox.Text = string.Empty;
+			if (textBox.Text == "0") textBox.Clear();
 			textBox.Text += "8";
 		}
         private void button_9_Click(object sender, EventArgs e)
         {
-			if (textBox.Text == "0") textBox.Text = string.Empty;
+			if (textBox.Text == "0") textBox.Clear();
 			textBox.Text += "9";
 		}
         private void button_Point_Click(object sender, EventArgs e)
         {
-			textBox.Text += ",";
+			textBox.Text += ".";
 		}
         private void button_BracketLeft_Click(object sender, EventArgs e)
         {
-			if (textBox.Text == "0") textBox.Text = string.Empty;
+			if (textBox.Text == "0") textBox.Clear();
 			textBox.Text += "(";
 		}
         private void button_BracketRight_Click(object sender, EventArgs e)
         {
-			if (textBox.Text == "0") textBox.Text = string.Empty;
+			if (textBox.Text == "0") textBox.Clear();
 			textBox.Text += ")";
 		}
         private void button_Add_Click(object sender, EventArgs e)
@@ -225,11 +225,9 @@ namespace crvCalc_v0._5
 		}
 		private void button_Calculate_Click(object sender, EventArgs e)
 		{
-
 			string tempResult = ExpressionToResult(textBox.Text);
 			listBox.Items.Add(textBox.Text + "=" + tempResult);
 			textBox.Text = tempResult;
-
 		}
         private void ToolStripMenuItem_File_Save_Click(object sender, EventArgs e)
         {
@@ -245,7 +243,6 @@ namespace crvCalc_v0._5
         {
 			Close();
         }
-
         private void ToolStripMenuItem_Help_About_Click(object sender, EventArgs e)
         {
 			MessageBox.Show("Простой калькулятор.\n\nchmilrv@gmail.com", "crvCalc_v0.5");
@@ -254,9 +251,9 @@ namespace crvCalc_v0._5
         {
 				buffer = textBox.SelectedText;
 		}
-
         private void ToolStripMenuItem_Edit_Paste_Click(object sender, EventArgs e)
         {
+			textBox.Clear();
 			textBox.Paste(buffer);
 		}
 
@@ -269,7 +266,6 @@ namespace crvCalc_v0._5
         {
 			Memory += Convert.ToDouble(textBox.Text);
         }
-
         private void button_MSubtract_Click(object sender, EventArgs e)
         {
 			Memory -= Convert.ToDouble(textBox.Text);
