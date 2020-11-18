@@ -341,6 +341,7 @@
             this.button_MemoryClear.TabIndex = 20;
             this.button_MemoryClear.Text = "MC";
             this.button_MemoryClear.UseVisualStyleBackColor = true;
+            this.button_MemoryClear.Click += new System.EventHandler(this.button_MemoryClear_Click);
             // 
             // button_MemoryRead
             // 
@@ -352,6 +353,7 @@
             this.button_MemoryRead.TabIndex = 21;
             this.button_MemoryRead.Text = "MR";
             this.button_MemoryRead.UseVisualStyleBackColor = true;
+            this.button_MemoryRead.Click += new System.EventHandler(this.button_MemoryRead_Click);
             // 
             // button_MemorySave
             // 
@@ -363,6 +365,7 @@
             this.button_MemorySave.TabIndex = 22;
             this.button_MemorySave.Text = "MS";
             this.button_MemorySave.UseVisualStyleBackColor = true;
+            this.button_MemorySave.Click += new System.EventHandler(this.button_MemorySave_Click);
             // 
             // button_MAdd
             // 
@@ -374,6 +377,7 @@
             this.button_MAdd.TabIndex = 23;
             this.button_MAdd.Text = "M+";
             this.button_MAdd.UseVisualStyleBackColor = true;
+            this.button_MAdd.Click += new System.EventHandler(this.button_MAdd_Click);
             // 
             // button_MSubtract
             // 
@@ -385,6 +389,7 @@
             this.button_MSubtract.TabIndex = 24;
             this.button_MSubtract.Text = "M-";
             this.button_MSubtract.UseVisualStyleBackColor = true;
+            this.button_MSubtract.Click += new System.EventHandler(this.button_MSubtract_Click);
             // 
             // button_BracketLeft
             // 
@@ -510,12 +515,14 @@
             this.ToolStripMenuItem_File_Save.Name = "ToolStripMenuItem_File_Save";
             this.ToolStripMenuItem_File_Save.Size = new System.Drawing.Size(177, 22);
             this.ToolStripMenuItem_File_Save.Text = "Сохранить журнал";
+            this.ToolStripMenuItem_File_Save.Click += new System.EventHandler(this.ToolStripMenuItem_File_Save_Click);
             // 
             // ToolStripMenuItem_File_Exit
             // 
             this.ToolStripMenuItem_File_Exit.Name = "ToolStripMenuItem_File_Exit";
             this.ToolStripMenuItem_File_Exit.Size = new System.Drawing.Size(177, 22);
             this.ToolStripMenuItem_File_Exit.Text = "Выход";
+            this.ToolStripMenuItem_File_Exit.Click += new System.EventHandler(this.ToolStripMenuItem_File_Exit_Click);
             // 
             // ToolStripMenuItem_Edit
             // 
@@ -531,12 +538,14 @@
             this.ToolStripMenuItem_Edit_Copy.Name = "ToolStripMenuItem_Edit_Copy";
             this.ToolStripMenuItem_Edit_Copy.Size = new System.Drawing.Size(139, 22);
             this.ToolStripMenuItem_Edit_Copy.Text = "Копировать";
+            this.ToolStripMenuItem_Edit_Copy.Click += new System.EventHandler(this.ToolStripMenuItem_Edit_Copy_Click);
             // 
             // ToolStripMenuItem_Edit_Paste
             // 
             this.ToolStripMenuItem_Edit_Paste.Name = "ToolStripMenuItem_Edit_Paste";
             this.ToolStripMenuItem_Edit_Paste.Size = new System.Drawing.Size(139, 22);
             this.ToolStripMenuItem_Edit_Paste.Text = "Вставить";
+            this.ToolStripMenuItem_Edit_Paste.Click += new System.EventHandler(this.ToolStripMenuItem_Edit_Paste_Click);
             // 
             // ToolStripMenuItem_Help
             // 
@@ -551,6 +560,7 @@
             this.ToolStripMenuItem_Help_About.Name = "ToolStripMenuItem_Help_About";
             this.ToolStripMenuItem_Help_About.Size = new System.Drawing.Size(149, 22);
             this.ToolStripMenuItem_Help_About.Text = "О программе";
+            this.ToolStripMenuItem_Help_About.Click += new System.EventHandler(this.ToolStripMenuItem_Help_About_Click);
             // 
             // timer1
             // 
@@ -566,6 +576,7 @@
             this.listBox.Name = "listBox";
             this.listBox.Size = new System.Drawing.Size(292, 144);
             this.listBox.TabIndex = 6;
+            this.listBox.DoubleClick += new System.EventHandler(this.listBox_DoubleClick);
             // 
             // Form1
             // 

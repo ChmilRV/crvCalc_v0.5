@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,9 @@ namespace crvCalc_v0._5
 {
     public partial class Form1 : Form
     {
-		string expression = string.Empty;
+		//string expression = string.Empty;
+		string buffer;
+		double Memory = 0;
 		//double num1;
 		//double num2;
 		public Form1()
@@ -112,8 +115,23 @@ namespace crvCalc_v0._5
 				string simple = BracketsToSimple(sub);
 				if (tempExp.IndexOfAny(new char[] { '(', ')' }) != -1) tempExp = tempExp.Replace('(' + tempSub + ')', simple);
 				else tempExp = tempExp.Replace(tempSub, simple);
-			} while (tempExp.Split(new char[] { '*', '/', '+', '-' }).Length > 2);
+			} while (tempExp.Split(new char[] { '*', '/', '+', '-' }).Length >= 3);
 			return tempExp;
+		}
+		static void WriteFileTXT(List<object> listTemp)
+		{
+			string pathTxt = "log.txt";
+			bool addToFile = false;
+			if (File.Exists(pathTxt))
+				addToFile = true;
+			using (StreamWriter sw = new StreamWriter(pathTxt, addToFile))
+			{
+				foreach (object item in listTemp)
+				{
+					sw.WriteLine(item);
+				}
+			}
+			MessageBox.Show("Файл \"" + pathTxt + "\" записан.");
 		}
 		private void button_0_Click(object sender, EventArgs e)
 		{
@@ -207,9 +225,69 @@ namespace crvCalc_v0._5
 		}
 		private void button_Calculate_Click(object sender, EventArgs e)
 		{
+
 			string tempResult = ExpressionToResult(textBox.Text);
 			listBox.Items.Add(textBox.Text + "=" + tempResult);
 			textBox.Text = tempResult;
+
 		}
+        private void ToolStripMenuItem_File_Save_Click(object sender, EventArgs e)
+        {
+			List<object> listTemp = new List<object>();
+			if (listBox.Items.Count != 0)
+			{
+				foreach (string item in listBox.Items)
+					listTemp.Add(item);
+			}
+			WriteFileTXT(listTemp);
+		}
+        private void ToolStripMenuItem_File_Exit_Click(object sender, EventArgs e)
+        {
+			Close();
+        }
+
+        private void ToolStripMenuItem_Help_About_Click(object sender, EventArgs e)
+        {
+			MessageBox.Show("Простой калькулятор.\n\nchmilrv@gmail.com", "crvCalc_v0.5");
+        }
+        private void ToolStripMenuItem_Edit_Copy_Click(object sender, EventArgs e)
+        {
+				buffer = textBox.SelectedText;
+		}
+
+        private void ToolStripMenuItem_Edit_Paste_Click(object sender, EventArgs e)
+        {
+			textBox.Paste(buffer);
+		}
+
+        private void listBox_DoubleClick(object sender, EventArgs e)
+        {
+			if (listBox.SelectedItems != null)
+				textBox.Text = listBox.SelectedItem.ToString();
+		}
+        private void button_MAdd_Click(object sender, EventArgs e)
+        {
+			Memory += Convert.ToDouble(textBox.Text);
+        }
+
+        private void button_MSubtract_Click(object sender, EventArgs e)
+        {
+			Memory -= Convert.ToDouble(textBox.Text);
+        }
+
+        private void button_MemorySave_Click(object sender, EventArgs e)
+        {
+			Memory = Convert.ToDouble(textBox.Text);
+        }
+
+        private void button_MemoryRead_Click(object sender, EventArgs e)
+        {
+			textBox.Text = string.Empty;
+			textBox.Text = Memory.ToString();
+        }
+        private void button_MemoryClear_Click(object sender, EventArgs e)
+        {
+			Memory = 0;
+        }
     }
 }
