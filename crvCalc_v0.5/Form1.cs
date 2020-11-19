@@ -16,7 +16,7 @@ namespace crvCalc_v0._5
     {
 		string buffer;
 		double Memory = 0;
-		bool oldTextDelete = true;
+		bool oldTextDelete = false;
 		public Form1()
         {
             InitializeComponent();
@@ -27,16 +27,16 @@ namespace crvCalc_v0._5
 			toolStripStatusLabel_Date.Text = DateTime.Now.ToShortDateString();
 			toolStripStatusLabel_Time.Text = DateTime.Now.ToLongTimeString();
 		}
-		public static double Add(double num1, double num2) { return num1 + num2; }
-		public static double Subtract(double num1, double num2) { return num1 - num2; }
-		public static double Multiply(double num1, double num2) { return num1 * num2; }
-		public static double Divide(double num1, double num2)
+		private static double Add(double num1, double num2) { return num1 + num2; }
+		private static double Subtract(double num1, double num2) { return num1 - num2; }
+		private static double Multiply(double num1, double num2) { return num1 * num2; }
+		private static double Divide(double num1, double num2)
 		{
 			if (num2 == 0) throw new Exception("Попытка деления на ноль.");
 			double res = num1 / num2;
 			return res;
 		}
-		public static string FindBracket(string _expr)
+		private static string FindBracket(string _expr)
 		{
 			string sub;
 			int openBracket;
@@ -49,7 +49,7 @@ namespace crvCalc_v0._5
 			else sub = _expr;
 			return sub;
 		}
-		public static string BracketsToSimple(string sub)
+		private static string BracketsToSimple(string sub)
 		{
 			IFormatProvider formatter = new NumberFormatInfo { NumberDecimalSeparator = "." };
 			char[] opers = { '*', '/', '-', '+' };
@@ -103,20 +103,20 @@ namespace crvCalc_v0._5
 			}
 			return sub;
 		}
-		public static string ExpressionToResult(string _expr)
+		private static string ExpressionToResult(string _expr)
 		{
-			string tempExp = _expr;
+			//string tempExp = _expr;
 			do
 			{
-				string sub = FindBracket(tempExp);
+				string sub = FindBracket(_expr/*tempExp*/);
 				string tempSub = sub;
 				string simple = BracketsToSimple(sub);
-				if (tempExp.IndexOfAny(new char[] { '(', ')' }) != -1) tempExp = tempExp.Replace('(' + tempSub + ')', simple);
-				else tempExp = tempExp.Replace(tempSub, simple);
-			} while (tempExp.Split(new char[] { '*', '/', '+', '-' }).Length >= 3);
-			return tempExp;
+				if (_expr/*tempExp*/.IndexOfAny(new char[] { '(', ')' }) != -1) _expr/*tempExp*/ = _expr/*tempExp*/.Replace('(' + tempSub + ')', simple);
+				else _expr/*tempExp*/ = _expr/*tempExp*/.Replace(tempSub, simple);
+			} while (_expr/*tempExp*/.Split(new char[] { '*', '/', '+', '-' }).Length >= 3);
+			return _expr/*tempExp*/;
 		}
-		static void WriteFileTXT(List<object> listTemp)
+		private static void WriteFileTXT(List<object> listTemp)
 		{
 			string pathTxt = "log.txt";
 			bool addToFile = false;
@@ -131,61 +131,90 @@ namespace crvCalc_v0._5
 			}
 			MessageBox.Show("Файл \"" + pathTxt + "\" записан.", "crvCalc_v0.5");
 		}
+		private void DisplayTextBox(string button, bool oldTextDelete)
+        {
 
+			if (textBox.Text == "0" && button != ".") textBox.Clear();
+			if (oldTextDelete) textBox.Clear();
 
+			textBox.Text += button;
+        }
 		private void button_0_Click(object sender, EventArgs e)
 		{
-			if (textBox.Text == "0") textBox.Clear();
-			textBox.Text += "0";
+			DisplayTextBox("0", oldTextDelete);
+
+			//if (textBox.Text == "0") textBox.Clear();
+			//textBox.Text += "0";
 		}
 		private void button_1_Click(object sender, EventArgs e)
 		{
-			if (textBox.Text == "0") textBox.Clear();
-			textBox.Text += "1";
+			DisplayTextBox("1", oldTextDelete);
+
+			//if (textBox.Text == "0") textBox.Clear();
+			//textBox.Text += "1";
 		}
 		private void button_2_Click(object sender, EventArgs e)
         {
-			if (textBox.Text == "0") textBox.Text = string.Empty;
-			textBox.Text += "2";
+			DisplayTextBox("2", oldTextDelete);
+
+			//if (textBox.Text == "0") textBox.Clear();
+			//textBox.Text += "2";
 		}
         private void button_3_Click(object sender, EventArgs e)
         {
-			if (textBox.Text == "0") textBox.Clear();
-			textBox.Text += "3";
+			DisplayTextBox("3", oldTextDelete);
+
+			//if (textBox.Text == "0") textBox.Clear();
+			//textBox.Text += "3";
 		}
         private void button_4_Click(object sender, EventArgs e)
         {
-			if (textBox.Text == "0") textBox.Clear();
-			textBox.Text += "4";
+			DisplayTextBox("4", oldTextDelete);
+
+			//if (textBox.Text == "0") textBox.Clear();
+			//textBox.Text += "4";
 		}
         private void button_5_Click(object sender, EventArgs e)
         {
-			if (textBox.Text == "0") textBox.Clear();
-			textBox.Text += "5";
+			DisplayTextBox("5", oldTextDelete);
+
+			//if (textBox.Text == "0") textBox.Clear();
+			//textBox.Text += "5";
 		}
         private void button_6_Click(object sender, EventArgs e)
         {
-			if (textBox.Text == "0") textBox.Clear();
-			textBox.Text += "6";
+			DisplayTextBox("6", oldTextDelete);
+
+			//if (textBox.Text == "0") textBox.Clear();
+			//textBox.Text += "6";
 		}
         private void button_7_Click(object sender, EventArgs e)
         {
-			if (textBox.Text == "0") textBox.Clear();
-			textBox.Text += "7";
+			DisplayTextBox("7", oldTextDelete);
+
+			//if (textBox.Text == "0") textBox.Clear();
+			//textBox.Text += "7";
 		}
         private void button_8_Click(object sender, EventArgs e)
         {
-			if (textBox.Text == "0") textBox.Clear();
-			textBox.Text += "8";
+			DisplayTextBox("8", oldTextDelete);
+
+			//if (textBox.Text == "0") textBox.Clear();
+			//textBox.Text += "8";
 		}
         private void button_9_Click(object sender, EventArgs e)
         {
-			if (textBox.Text == "0") textBox.Clear();
-			textBox.Text += "9";
+			DisplayTextBox("9", oldTextDelete);
+
+			//if (textBox.Text == "0") textBox.Clear();
+			//textBox.Text += "9";
 		}
         private void button_Point_Click(object sender, EventArgs e)
         {
-			textBox.Text += ".";
+			if (textBox.Text.LastIndexOf('.') != textBox.Text.Length - 1 || textBox.Text.LastIndexOf('.') == -1)
+				DisplayTextBox(".", oldTextDelete);//_________________________________ставить только одну точку_
+
+			//textBox.Text += ".";
 		}
         private void button_BracketLeft_Click(object sender, EventArgs e)
         {
