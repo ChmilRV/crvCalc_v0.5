@@ -16,7 +16,6 @@ namespace crvCalc_v0._5
     {
 		string buffer;
 		double Memory = 0;
-		bool oldTextDelete = false;
 		public Form1()
         {
             InitializeComponent();
@@ -131,122 +130,85 @@ namespace crvCalc_v0._5
 			}
 			MessageBox.Show("Файл \"" + pathTxt + "\" записан.", "crvCalc_v0.5");
 		}
-		private void DisplayTextBox(string button, bool oldTextDelete)
+		private void DisplayTextBox(string button)
         {
 
 			if (textBox.Text == "0" && button != ".") textBox.Clear();
-			if (oldTextDelete) textBox.Clear();
-
+			//if (button == "." && textBox.Text.LastIndexOf(".") == textBox.Text.Length - 1) textBox.Text = textBox.Text; //___???
 			textBox.Text += button;
         }
 		private void button_0_Click(object sender, EventArgs e)
 		{
-			DisplayTextBox("0", oldTextDelete);
-
-			//if (textBox.Text == "0") textBox.Clear();
-			//textBox.Text += "0";
+			DisplayTextBox("0");
 		}
 		private void button_1_Click(object sender, EventArgs e)
 		{
-			DisplayTextBox("1", oldTextDelete);
-
-			//if (textBox.Text == "0") textBox.Clear();
-			//textBox.Text += "1";
+			DisplayTextBox("1");
 		}
 		private void button_2_Click(object sender, EventArgs e)
         {
-			DisplayTextBox("2", oldTextDelete);
-
-			//if (textBox.Text == "0") textBox.Clear();
-			//textBox.Text += "2";
+			DisplayTextBox("2");
 		}
         private void button_3_Click(object sender, EventArgs e)
         {
-			DisplayTextBox("3", oldTextDelete);
-
-			//if (textBox.Text == "0") textBox.Clear();
-			//textBox.Text += "3";
+			DisplayTextBox("3");
 		}
         private void button_4_Click(object sender, EventArgs e)
         {
-			DisplayTextBox("4", oldTextDelete);
-
-			//if (textBox.Text == "0") textBox.Clear();
-			//textBox.Text += "4";
+			DisplayTextBox("4");
 		}
         private void button_5_Click(object sender, EventArgs e)
         {
-			DisplayTextBox("5", oldTextDelete);
-
-			//if (textBox.Text == "0") textBox.Clear();
-			//textBox.Text += "5";
+			DisplayTextBox("5");
 		}
         private void button_6_Click(object sender, EventArgs e)
         {
-			DisplayTextBox("6", oldTextDelete);
-
-			//if (textBox.Text == "0") textBox.Clear();
-			//textBox.Text += "6";
+			DisplayTextBox("6");
 		}
         private void button_7_Click(object sender, EventArgs e)
         {
-			DisplayTextBox("7", oldTextDelete);
-
-			//if (textBox.Text == "0") textBox.Clear();
-			//textBox.Text += "7";
+			DisplayTextBox("7");
 		}
         private void button_8_Click(object sender, EventArgs e)
         {
-			DisplayTextBox("8", oldTextDelete);
-
-			//if (textBox.Text == "0") textBox.Clear();
-			//textBox.Text += "8";
+			DisplayTextBox("8");
 		}
         private void button_9_Click(object sender, EventArgs e)
         {
-			DisplayTextBox("9", oldTextDelete);
-
-			//if (textBox.Text == "0") textBox.Clear();
-			//textBox.Text += "9";
+			DisplayTextBox("9");
 		}
         private void button_Point_Click(object sender, EventArgs e)
         {
-			if (textBox.Text.LastIndexOf('.') != textBox.Text.Length - 1 || textBox.Text.LastIndexOf('.') == -1)
-				DisplayTextBox(".", oldTextDelete);//_________________________________ставить только одну точку_
-
-			//textBox.Text += ".";
+			DisplayTextBox(".");//_________________________________ставить только одну точку ???
 		}
         private void button_BracketLeft_Click(object sender, EventArgs e)
         {
-			if (textBox.Text == "0") textBox.Clear();
-			textBox.Text += "(";
+			DisplayTextBox("(");
 		}
         private void button_BracketRight_Click(object sender, EventArgs e)
         {
-			if (textBox.Text == "0") textBox.Clear();
-			textBox.Text += ")";
+			DisplayTextBox(")");
 		}
         private void button_Add_Click(object sender, EventArgs e)
         {
-			textBox.Text += "+";
+			DisplayTextBox("+");
 		}
         private void button_Subtract_Click(object sender, EventArgs e)
         {
-			textBox.Text += "-";
+			DisplayTextBox("-");
 		}
         private void button_Multiply_Click(object sender, EventArgs e)
         {
-			textBox.Text += "*";
+			DisplayTextBox("*");
 		}
         private void button_Divide_Click(object sender, EventArgs e)
         {
-			textBox.Text += "/";
+			DisplayTextBox("/");
 		}
         private void button_Backspace_Click(object sender, EventArgs e)
         {
-
-			if (textBox.Text == string.Empty) textBox.Text = "0";
-			else textBox.Text = textBox.Text.ToString().Remove(textBox.Text.ToString().Length - 1);
+			if (textBox.Text == "0") textBox.Text = "0";
+			else textBox.Text = textBox.Text.Remove(textBox.Text.Length - 1);
         }
 		private void button_Discharge_Click(object sender, EventArgs e)
 		{
@@ -254,9 +216,16 @@ namespace crvCalc_v0._5
 		}
 		private void button_Calculate_Click(object sender, EventArgs e)
 		{
-			string tempResult = ExpressionToResult(textBox.Text);
-			listBox.Items.Add(textBox.Text + "=" + tempResult);
-			textBox.Text = tempResult;
+            try
+            {
+				string tempResult = ExpressionToResult(textBox.Text);
+				listBox.Items.Add(textBox.Text + "=" + tempResult);
+				textBox.Text = tempResult;
+			}
+            catch
+            {
+				MessageBox.Show("Неверный формат введенного выражения." ,"crvCalc_v0.5");
+            }
 		}
         private void ToolStripMenuItem_File_Save_Click(object sender, EventArgs e)
         {
@@ -285,11 +254,10 @@ namespace crvCalc_v0._5
 			textBox.Clear();
 			textBox.Paste(buffer);
 		}
-
         private void listBox_DoubleClick(object sender, EventArgs e)
         {
 			if (listBox.SelectedItems != null)
-				textBox.Text = listBox.SelectedItem.ToString();
+				textBox.Text = listBox.SelectedItem.ToString().Remove(listBox.SelectedItem.ToString().LastIndexOf("="));
 		}
         private void button_MAdd_Click(object sender, EventArgs e)
         {
@@ -299,20 +267,22 @@ namespace crvCalc_v0._5
         {
 			Memory -= Convert.ToDouble(textBox.Text);
         }
-
         private void button_MemorySave_Click(object sender, EventArgs e)
         {
 			Memory = Convert.ToDouble(textBox.Text);
         }
-
         private void button_MemoryRead_Click(object sender, EventArgs e)
         {
-			textBox.Text = string.Empty;
 			textBox.Text = Memory.ToString();
         }
         private void button_MemoryClear_Click(object sender, EventArgs e)
         {
 			Memory = 0;
+        }
+
+        private void button_PlusMinus_Click(object sender, EventArgs e)
+        {
+			//__________________________________________________________________????
         }
     }
 }

@@ -161,6 +161,7 @@
             this.button_PlusMinus.TabIndex = 2;
             this.button_PlusMinus.Text = "+/-";
             this.button_PlusMinus.UseVisualStyleBackColor = true;
+            this.button_PlusMinus.Click += new System.EventHandler(this.button_PlusMinus_Click);
             // 
             // button_Add
             // 
