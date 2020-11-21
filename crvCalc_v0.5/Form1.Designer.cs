@@ -32,7 +32,6 @@
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.button_0 = new System.Windows.Forms.Button();
             this.button_Point = new System.Windows.Forms.Button();
-            this.button_PlusMinus = new System.Windows.Forms.Button();
             this.button_Add = new System.Windows.Forms.Button();
             this.button_Calculate = new System.Windows.Forms.Button();
             this.button_1 = new System.Windows.Forms.Button();
@@ -73,6 +72,7 @@
             this.ToolStripMenuItem_Help_About = new System.Windows.Forms.ToolStripMenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.listBox = new System.Windows.Forms.ListBox();
+            this.label_MemoryLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.menuStrip.SuspendLayout();
@@ -87,8 +87,7 @@
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel.Controls.Add(this.button_0, 0, 5);
-            this.tableLayoutPanel.Controls.Add(this.button_Point, 1, 5);
-            this.tableLayoutPanel.Controls.Add(this.button_PlusMinus, 2, 5);
+            this.tableLayoutPanel.Controls.Add(this.button_Point, 2, 5);
             this.tableLayoutPanel.Controls.Add(this.button_Add, 3, 5);
             this.tableLayoutPanel.Controls.Add(this.button_Calculate, 4, 2);
             this.tableLayoutPanel.Controls.Add(this.button_1, 0, 4);
@@ -129,11 +128,12 @@
             // 
             // button_0
             // 
+            this.tableLayoutPanel.SetColumnSpan(this.button_0, 2);
             this.button_0.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button_0.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button_0.Location = new System.Drawing.Point(6, 256);
             this.button_0.Name = "button_0";
-            this.button_0.Size = new System.Drawing.Size(53, 48);
+            this.button_0.Size = new System.Drawing.Size(112, 48);
             this.button_0.TabIndex = 0;
             this.button_0.Text = "0";
             this.button_0.UseVisualStyleBackColor = true;
@@ -143,25 +143,13 @@
             // 
             this.button_Point.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button_Point.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button_Point.Location = new System.Drawing.Point(65, 256);
+            this.button_Point.Location = new System.Drawing.Point(124, 256);
             this.button_Point.Name = "button_Point";
             this.button_Point.Size = new System.Drawing.Size(53, 48);
             this.button_Point.TabIndex = 1;
             this.button_Point.Text = ",";
             this.button_Point.UseVisualStyleBackColor = true;
             this.button_Point.Click += new System.EventHandler(this.button_Point_Click);
-            // 
-            // button_PlusMinus
-            // 
-            this.button_PlusMinus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button_PlusMinus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button_PlusMinus.Location = new System.Drawing.Point(124, 256);
-            this.button_PlusMinus.Name = "button_PlusMinus";
-            this.button_PlusMinus.Size = new System.Drawing.Size(53, 48);
-            this.button_PlusMinus.TabIndex = 2;
-            this.button_PlusMinus.Text = "+/-";
-            this.button_PlusMinus.UseVisualStyleBackColor = true;
-            this.button_PlusMinus.Click += new System.EventHandler(this.button_PlusMinus_Click);
             // 
             // button_Add
             // 
@@ -579,11 +567,23 @@
             this.listBox.TabIndex = 6;
             this.listBox.DoubleClick += new System.EventHandler(this.listBox_DoubleClick);
             // 
+            // label_MemoryLabel
+            // 
+            this.label_MemoryLabel.AutoSize = true;
+            this.label_MemoryLabel.BackColor = System.Drawing.SystemColors.Window;
+            this.label_MemoryLabel.Font = new System.Drawing.Font("Arial Narrow", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label_MemoryLabel.Location = new System.Drawing.Point(12, 184);
+            this.label_MemoryLabel.Name = "label_MemoryLabel";
+            this.label_MemoryLabel.Size = new System.Drawing.Size(24, 37);
+            this.label_MemoryLabel.TabIndex = 7;
+            this.label_MemoryLabel.Text = " ";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(304, 561);
+            this.Controls.Add(this.label_MemoryLabel);
             this.Controls.Add(this.listBox);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip);
@@ -611,7 +611,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
         private System.Windows.Forms.Button button_0;
         private System.Windows.Forms.Button button_Point;
-        private System.Windows.Forms.Button button_PlusMinus;
         private System.Windows.Forms.Button button_Add;
         private System.Windows.Forms.Button button_Calculate;
         private System.Windows.Forms.Button button_1;
@@ -652,6 +651,7 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_Time;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel_Mail;
         private System.Windows.Forms.ListBox listBox;
+        private System.Windows.Forms.Label label_MemoryLabel;
     }
 }
 

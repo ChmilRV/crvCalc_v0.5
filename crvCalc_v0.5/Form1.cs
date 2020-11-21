@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace crvCalc_v0._5
@@ -46,6 +40,66 @@ namespace crvCalc_v0._5
 				sub = _expr.Substring(openBracket + 1, closeBracket - openBracket - 1);
 			}
 			else sub = _expr;
+			return sub;
+		}
+		public static string KillTwoSign(string sub)
+		{
+			sub = sub.Replace("+-", "-");
+			sub = sub.Replace("--", "+");
+			if (sub.IndexOf("*-") != -1)
+			{
+				char[] tempExpArray = sub.ToCharArray();
+				for (int ii = 1; ii < tempExpArray.Length; ii++)
+				{
+					if (tempExpArray[ii] == '*' && tempExpArray[ii + 1] == '-')
+					{
+						for (int j = ii; j >= 0; j--)
+						{
+							if (tempExpArray[j] == '-')
+							{
+								if (j == 0) tempExpArray[j] = ' ';
+								else tempExpArray[j] = '+';
+								break;
+							}
+							if (tempExpArray[j] == '+')
+							{
+								tempExpArray[j] = '-';
+								break;
+							}
+						}
+						tempExpArray[ii + 1] = ' ';
+					}
+				}
+				sub = new string(tempExpArray);
+				while (sub.IndexOf(" ") != -1) sub = sub.Remove(sub.IndexOf(" "), 1);
+			}
+			if (sub.IndexOf("/-") != -1)
+			{
+				char[] tempExpArray = sub.ToCharArray();
+				for (int iii = 1; iii < tempExpArray.Length; iii++)
+				{
+					if (tempExpArray[iii] == '/' && tempExpArray[iii + 1] == '-')
+					{
+						for (int j = iii; j >= 0; j--)
+						{
+							if (tempExpArray[j] == '-')
+							{
+								if (j == 0) tempExpArray[j] = ' ';
+								else tempExpArray[j] = '+';
+								break;
+							}
+							if (tempExpArray[j] == '+')
+							{
+								tempExpArray[j] = '-';
+								break;
+							}
+						}
+						tempExpArray[iii + 1] = ' ';
+					}
+				}
+				sub = new string(tempExpArray);
+				while (sub.IndexOf(" ") != -1) sub = sub.Remove(sub.IndexOf(" "), 1);
+			}
 			return sub;
 		}
 		private static string BracketsToSimple(string sub)
@@ -104,16 +158,17 @@ namespace crvCalc_v0._5
 		}
 		private static string ExpressionToResult(string _expr)
 		{
-			//string tempExp = _expr;
+			string tempExp = _expr;
 			do
 			{
-				string sub = FindBracket(_expr/*tempExp*/);
+				string sub = FindBracket(_expr);
 				string tempSub = sub;
 				string simple = BracketsToSimple(sub);
-				if (_expr/*tempExp*/.IndexOfAny(new char[] { '(', ')' }) != -1) _expr/*tempExp*/ = _expr/*tempExp*/.Replace('(' + tempSub + ')', simple);
-				else _expr/*tempExp*/ = _expr/*tempExp*/.Replace(tempSub, simple);
-			} while (_expr/*tempExp*/.Split(new char[] { '*', '/', '+', '-' }).Length >= 3);
-			return _expr/*tempExp*/;
+				if (_expr.IndexOfAny(new char[] { '(', ')' }) != -1) _expr = _expr.Replace('(' + tempSub + ')', simple);
+				else _expr = _expr.Replace(tempSub, simple);
+				tempExp = KillTwoSign(tempExp);
+			} while (_expr.Split(new char[] { '*', '/', '+', '-' }).Length >= 3);
+			return _expr;
 		}
 		private static void WriteFileTXT(List<object> listTemp)
 		{
@@ -132,11 +187,14 @@ namespace crvCalc_v0._5
 		}
 		private void DisplayTextBox(string button)
         {
-
 			if (textBox.Text == "0" && button != ".") textBox.Clear();
-			//if (button == "." && textBox.Text.LastIndexOf(".") == textBox.Text.Length - 1) textBox.Text = textBox.Text; //___???
 			textBox.Text += button;
         }
+		private void CheckMemoryIndicator()
+        {
+			if (Memory != 0) label_MemoryLabel.Text = "M";
+			else label_MemoryLabel.Text = " ";
+		}
 		private void button_0_Click(object sender, EventArgs e)
 		{
 			DisplayTextBox("0");
@@ -179,7 +237,7 @@ namespace crvCalc_v0._5
 		}
         private void button_Point_Click(object sender, EventArgs e)
         {
-			DisplayTextBox(".");//_________________________________ставить только одну точку ???
+			DisplayTextBox(".");
 		}
         private void button_BracketLeft_Click(object sender, EventArgs e)
         {
@@ -262,27 +320,27 @@ namespace crvCalc_v0._5
         private void button_MAdd_Click(object sender, EventArgs e)
         {
 			Memory += Convert.ToDouble(textBox.Text);
+			CheckMemoryIndicator();
         }
         private void button_MSubtract_Click(object sender, EventArgs e)
         {
 			Memory -= Convert.ToDouble(textBox.Text);
-        }
+			CheckMemoryIndicator();
+		}
         private void button_MemorySave_Click(object sender, EventArgs e)
         {
 			Memory = Convert.ToDouble(textBox.Text);
-        }
+			CheckMemoryIndicator();
+		}
         private void button_MemoryRead_Click(object sender, EventArgs e)
         {
 			textBox.Text = Memory.ToString();
-        }
+			CheckMemoryIndicator();
+		}
         private void button_MemoryClear_Click(object sender, EventArgs e)
         {
 			Memory = 0;
-        }
-
-        private void button_PlusMinus_Click(object sender, EventArgs e)
-        {
-			//__________________________________________________________________????
-        }
+			CheckMemoryIndicator();
+		}
     }
 }
